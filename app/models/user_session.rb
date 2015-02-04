@@ -1,12 +1,19 @@
 class UserSession < Authlogic::Session::Base
-  
+
   attr_accessor :remote_ip
   attr_reader :session_id
 
   after_create :do_after_create
+
+  private
   
+  def do_after_create
+    user.last_login_at = DateTime.now
+    log_session
+  end
+
   def log_session
-    @session_id = ActiveSupport::SecureRandom.hex(20)
+    @session_id = SecureRandom.hex(20)
     UserSessionLog.create!({
       :user => user,
       :session_id => session_id,
@@ -15,9 +22,4 @@ class UserSession < Authlogic::Session::Base
     })
   end
 
-  private
-
-  def do_after_create
-    user.last_login_at = DateTime.now
-  end
 end

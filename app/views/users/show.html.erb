@@ -17,7 +17,7 @@
 </p>
 <p>
   <strong>Last Login:</strong>
-  <%= @user.last_login_at %>
+  <%= date_format(@user.last_login_at) %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
