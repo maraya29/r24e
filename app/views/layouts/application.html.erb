@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>R24e</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+	<head>
+		<title>R24e Site</title>
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td valign="middle"><h1><a href="/">R42e Site</a></h1></td>
+				<td valign="middle" align="right" id="user_label"> <% if current_user.present? -%> <span >You are signed in as <span><%= current_user.full_name %></span>
+					<nobr>
+						(<%= link_to 'sign out', logout_app %>)
+					</nobr></span> <% end -%> </td>
+				<td width="10%"><a href="/"><%= image_tag 'logo.jpg' %></a></td>
+			</tr>
+			<tr>
+				<td colspan="3" id="navigation"></td>
+			</tr>
+		</table>
+		<%= yield %>
+	</body>
 </html>
